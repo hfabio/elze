@@ -1,0 +1,58 @@
+{
+  "name": "elze",
+  "version": "0.0.1",
+  "description": "elze management",
+  "main": "index.js",
+  "scripts": {
+    "dev": "BROWSER=none react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hfabio/elze.git"
+  },
+  "keywords": [
+    "elze;management"
+  ],
+  "author": "Helton Fabio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hfabio/elze/issues"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "5.1.3",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.0.3",
+    "react-data-table-component": "^7.4.5",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "styled-components": "^5.3.3",
+    "web-vitals": "^2.1.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  }
+}
