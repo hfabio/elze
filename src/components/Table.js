@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import DataTable from "react-data-table-component";
+import EditImage from "../assets/edit.png";
 
 const noData = "Sem informações";
 const caseInsensitiveSort = (textA, textB) => {
@@ -41,7 +42,7 @@ function Table({ alunos, editCallback }) {
       },
       {
         name: "ID Projeto",
-        selector: (row) => row?.idProjeto ?? noData,
+        selector: (row) => row?.projetoId ?? noData,
         sortable: true,
         searchable: true,
       },
@@ -107,7 +108,12 @@ function Table({ alunos, editCallback }) {
       {
         name: "Editar",
         selector: (row) => (
-          <span onClick={() => editCallback(row.index)}>edit</span>
+          <img
+            src={EditImage}
+            style={{ cursor: "pointer", width: "24px" }}
+            alt="Botão de editar"
+            onClick={() => editCallback(row.index)}
+          />
         ),
         sortable: false,
         searchable: false,

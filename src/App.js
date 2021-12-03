@@ -4,7 +4,7 @@ import { exportData, importData } from "./tools/Backup";
 import Input from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 
-import { Header } from "./style";
+import { Header, PageTitle, NotaDeRodape } from "./style";
 import Table from "./components/Table";
 import ModalNovoAluno from "./components/ModalNovoAluno";
 
@@ -12,18 +12,27 @@ const App = () => {
   const [alunos, setAlunos] = useState([]);
   const [filtro, setFiltro] = useState("");
   const [showModalNovoAluno, setShowModalNovoAluno] = useState(false);
+  const [editingId, setEditingId] = useState(false);
 
   const refInput = useRef();
 
   useEffect(() => {
     const data = rehidrate();
-    if (data?.data) {
-      setAlunos(data.data);
+    if (data?.data?.length > 0) {
+      setAlunos(() => data.data);
     }
   }, []);
+
   useEffect(() => {
-    dehidrate(alunos);
+    const data = rehidrate();
+    if (JSON.stringify(data?.data) !== JSON.stringify(alunos)) {
+      dehidrate(alunos);
+    }
   }, [alunos]);
+
+  useEffect(() => {
+    console.log(showModalNovoAluno);
+  }, [showModalNovoAluno]);
 
   const addAluno = () => {
     // const newAlunos = Array(500)
@@ -41,9 +50,7 @@ const App = () => {
     exportData(alunos);
   };
 
-  const editCallback = (index) => {
-    console.log(index);
-  };
+  const editCallback = (index) => setEditingId(index);
 
   const clearAluno = () => {
     const response = window.confirm(
@@ -77,12 +84,36 @@ const App = () => {
     }
   };
 
-  const closeModal = () => setShowModalNovoAluno(false);
+  const closeModal = () => {
+    setShowModalNovoAluno(false);
+    setEditingId(null);
+  };
+
+  const handleSave = (aluno) => {
+    if (editingId) {
+      const currentAlunos = [...alunos];
+      currentAlunos[editingId] = aluno;
+      setAlunos(currentAlunos);
+      setEditingId(null);
+    } else {
+      setAlunos((prevState) => [...prevState, aluno]);
+    }
+  };
+
+  const shouldShowModal = () => showModalNovoAluno || !isNaN(String(editingId));
 
   return (
     <section>
-      <ModalNovoAluno show={showModalNovoAluno} closeModal={closeModal} />
+      {shouldShowModal() && (
+        <ModalNovoAluno
+          show={shouldShowModal()}
+          closeModal={closeModal}
+          saveData={handleSave}
+          aluno={alunos[editingId]}
+        />
+      )}
       <section>
+        <PageTitle>Elze - Gestão de alunos</PageTitle>
         <Header>
           <Button variant="primary" onClick={addAluno}>
             Adicionar aluno
@@ -106,21 +137,26 @@ const App = () => {
           <section className="sm-2">
             <Input
               type="text"
-              placeholder="Buscar"
+              placeholder="Buscar aluno"
               value={filtro}
               onChange={({ target }) => setFiltro(target.value)}
             />
           </section>
         </Header>
       </section>
-      <ul>
-        <Table
-          alunos={alunos
-            .filter((aluno) => JSON.stringify(aluno).includes(filtro))
-            .map((aluno, index) => ({ ...aluno, index }))}
-          editCallback={editCallback}
-        />
-      </ul>
+      <Table
+        alunos={alunos
+          .filter((aluno) =>
+            JSON.stringify(aluno).toLowerCase().includes(filtro.toLowerCase())
+          )
+          .map((aluno, index) => ({ ...aluno, index }))}
+        editCallback={editCallback}
+      />
+      <NotaDeRodape>
+        Nota: os dados contidos nessa página ficam armazenados no seu navegador.
+        Caso deseje usar em outro dispositivo faça o backup. Limpar o cache do
+        seu navegador também apagará os dados!
+      </NotaDeRodape>
     </section>
   );
 };

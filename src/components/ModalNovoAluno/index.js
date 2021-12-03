@@ -7,18 +7,36 @@ import Modal from "react-bootstrap/Modal";
 import TextField from "../TextField";
 import DateField from "../DateField";
 
-const ModalNovoAluno = ({ show, closeModal }) => {
-  const [projeto, setProjeto] = useState("");
-  const [projetoId, setProjetoId] = useState("");
-  const [bolsista, setBolsista] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [valor, setValor] = useState(0);
-  const [inicio, setInicio] = useState(null);
-  const [final, setFinal] = useState(null);
-  const [situacao, setSituacao] = useState("");
-  const [relatorio, setRelatorio] = useState("");
-  const [atividades, setAtividades] = useState("");
-  const [entrega, setEntrega] = useState(null);
+const ModalNovoAluno = ({ show, closeModal, saveData, aluno }) => {
+  const [projeto, setProjeto] = useState(aluno?.projeto || "");
+  const [projetoId, setProjetoId] = useState(aluno?.projetoId ?? "");
+  const [bolsista, setBolsista] = useState(aluno?.nome ?? "");
+  const [cpf, setCpf] = useState(aluno?.cpf ?? "");
+  const [valor, setValor] = useState(aluno?.valor ?? 0);
+  const [inicio, setInicio] = useState(aluno?.inicio ?? "");
+  const [final, setFinal] = useState(aluno?.final ?? "");
+  const [situacao, setSituacao] = useState(aluno?.situacao ?? "");
+  const [relatorio, setRelatorio] = useState(aluno?.relatorio ?? "");
+  const [atividades, setAtividades] = useState(aluno?.atividades ?? "");
+  const [entrega, setEntrega] = useState(aluno?.entrega ?? "");
+
+  const save = () => {
+    const aluno = {
+      projeto,
+      projetoId,
+      nome: bolsista,
+      cpf,
+      valor,
+      inicio,
+      final,
+      situacao,
+      relatorio,
+      atividades,
+      entrega,
+    };
+    saveData(aluno);
+    closeModal();
+  };
 
   if (!show) return null;
   return (
@@ -124,7 +142,9 @@ const ModalNovoAluno = ({ show, closeModal }) => {
         <Button variant="secondary" onClick={closeModal}>
           Close
         </Button>
-        <Button variant="primary">Save changes</Button>
+        <Button variant="primary" onClick={save}>
+          Salvar
+        </Button>
       </Modal.Footer>
       {/* </ModalContainer> */}
     </Modal>

@@ -17,3 +17,19 @@ export const Header = styled.header`
   justify-content: space-between;
   padding: 0 5vw 0;
 `;
+
+export const PageTitle = styled.h1`
+  font-size: 56px;
+  width: 100vw;
+  height: 5vh;
+  padding-top: 5px;
+  display: inline-block;
+  text-align: center;
+`;
+
+export const NotaDeRodape = styled.span`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: #939292;
+`;
