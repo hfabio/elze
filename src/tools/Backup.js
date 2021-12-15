@@ -4,7 +4,18 @@ const getDateString = () => {
   return parts.replace(/:/g, "-").trim();
 };
 
-export const exportData = (data) => {
+const getCsvData = data => {
+  const headers = Object.keys(data[0]);
+  console.log({headers, data});
+  const rows = [
+    headers.map(e => `${e.charAt(0).toUpperCase()}${e.slice(1)}`), 
+    ...data.map(element => headers.reduce((acc, curr) => [...acc, element[curr] || ''], []))
+  ];
+  console.log({rows});
+  return rows.map(e => `"${e.join('";"')}"`).join('\n');
+}
+
+export const exportDataJson = (data) => {
   const blob = new Blob([JSON.stringify(data, undefined, 4)], {
     type: "text/json",
   });
@@ -14,6 +25,36 @@ export const exportData = (data) => {
   a.download = `backup elze ${getDateString()}.json`;
   a.href = window.URL.createObjectURL(blob);
   a.dataset.downloadurl = ["text/json", a.download, a.href].join(":");
+  e.initMouseEvent(
+    "click",
+    true,
+    false,
+    window,
+    0,
+    0,
+    0,
+    0,
+    0,
+    false,
+    false,
+    false,
+    false,
+    0,
+    null
+  );
+  a.dispatchEvent(e);
+};
+
+export const exportDataCsv = (data) => {
+  const blob = new Blob([getCsvData(data)], {
+    type: "text/csv",
+  });
+  const e = document.createEvent("MouseEvents");
+  const a = document.createElement("a");
+
+  a.download = `backup elze ${getDateString()}.csv`;
+  a.href = window.URL.createObjectURL(blob);
+  a.dataset.downloadurl = ["text/csv", a.download, a.href].join(":");
   e.initMouseEvent(
     "click",
     true,

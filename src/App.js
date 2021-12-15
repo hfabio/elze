@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { rehidrate, dehidrate } from "./tools/hydration";
-import { exportData, importData } from "./tools/Backup";
+import { exportDataCsv, exportDataJson, importData } from "./tools/Backup";
 import Input from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 
@@ -46,8 +46,12 @@ const App = () => {
     setShowModalNovoAluno(true);
   };
 
-  const backupAluno = () => {
-    exportData(alunos);
+  const backupAluno = type => {
+    if(type === 'csv'){
+      exportDataCsv(alunos);
+    }else{
+      exportDataJson(alunos);
+    }
   };
 
   const editCallback = (index) => setEditingId(index);
@@ -118,11 +122,14 @@ const App = () => {
           <Button variant="primary" onClick={addAluno}>
             Adicionar aluno
           </Button>
-          <Button variant="primary" onClick={backupAluno}>
-            Fazer backup
+          <Button variant="primary" onClick={() => backupAluno('json')}>
+            Fazer backup (.JSON)
+          </Button>
+          <Button variant="primary" onClick={() => backupAluno('csv')}>
+            Fazer backup (.CSV)
           </Button>
           <Button variant="primary" onClick={() => refInput.current.click()}>
-            Importar backup
+            Importar backup (.JSON)
           </Button>
           <Button variant="danger" onClick={clearAluno}>
             Limpar dados
