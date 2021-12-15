@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.js": "/elze/static/js/main.90904816.chunk.js",
-    "main.js.map": "/elze/static/js/main.90904816.chunk.js.map",
+    "main.js": "/elze/static/js/main.30520fbf.chunk.js",
+    "main.js.map": "/elze/static/js/main.30520fbf.chunk.js.map",
     "runtime-main.js": "/elze/static/js/runtime-main.12c9d612.js",
     "runtime-main.js.map": "/elze/static/js/runtime-main.12c9d612.js.map",
     "static/css/2.383c0125.chunk.css": "/elze/static/css/2.383c0125.chunk.css",
-    "static/js/2.6e106568.chunk.js": "/elze/static/js/2.6e106568.chunk.js",
-    "static/js/2.6e106568.chunk.js.map": "/elze/static/js/2.6e106568.chunk.js.map",
+    "static/js/2.ec25a325.chunk.js": "/elze/static/js/2.ec25a325.chunk.js",
+    "static/js/2.ec25a325.chunk.js.map": "/elze/static/js/2.ec25a325.chunk.js.map",
     "index.html": "/elze/index.html",
     "static/css/2.383c0125.chunk.css.map": "/elze/static/css/2.383c0125.chunk.css.map",
-    "static/js/2.6e106568.chunk.js.LICENSE.txt": "/elze/static/js/2.6e106568.chunk.js.LICENSE.txt"
+    "static/js/2.ec25a325.chunk.js.LICENSE.txt": "/elze/static/js/2.ec25a325.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.12c9d612.js",
     "static/css/2.383c0125.chunk.css",
-    "static/js/2.6e106568.chunk.js",
-    "static/js/main.90904816.chunk.js"
+    "static/js/2.ec25a325.chunk.js",
+    "static/js/main.30520fbf.chunk.js"
   ]
 }
