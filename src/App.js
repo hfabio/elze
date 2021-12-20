@@ -162,7 +162,7 @@ const App = () => {
       <NotaDeRodape>
         Nota: os dados contidos nessa página ficam armazenados no seu navegador.
         Caso deseje usar em outro dispositivo faça o backup. Limpar o cache do
-        seu navegador também apagará os dados!
+        seu navegador também apagará os dados!!
       </NotaDeRodape>
     </section>
   );
